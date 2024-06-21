@@ -8,7 +8,7 @@ if(!class_exists('DW_Widget')){
         {
             wp_add_dashboard_widget(
             'dw_dashboard_widget',
-            'Custom Dashboard Widget',
+            'Graph Widget',
             array(__CLASS__,'render_dashboard_widget') 
         );
         }

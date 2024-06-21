@@ -35,7 +35,29 @@
   to {
     transform: rotate(360deg);
   }
-} 
-#dashboard-widgets .postbox .inside{
-  padding: 0 30px 35px 0 !important; 
+}
+
+#dashboard-widgets .postbox .inside {
+  padding: 0 50px 35px 0 !important;
+}
+
+#dw_dashboard_widget .filter-dropdown {
+  float: right;
+  z-index: 999;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #777;
+  border-color: #777 !important;
+}
+
+#dw_dashboard_widget .inside #root .App {
+  margin-bottom: 25px;
+}
+#dw_dashboard_widget .inside #root .App .no-data {
+  height: 96%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
