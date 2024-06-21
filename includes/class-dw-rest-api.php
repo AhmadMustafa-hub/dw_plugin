@@ -3,7 +3,9 @@ if (!class_exists('DW_REST_API')) {
 
     class DW_REST_API
     {
-
+        /**
+         * Register REST API routes.
+         */
         public static function register_routes()
         {
             register_rest_route(
@@ -29,12 +31,21 @@ if (!class_exists('DW_REST_API')) {
                 )
             );
         }
-        public static function get_data($data){
+        
+        /**
+         * Get data from the database.
+         *
+         * @param WP_REST_Request $data The request object.
+         * @return array The data from the database.
+         */
+        
+        public static function get_data($data)
+        {
             global $wpdb;
-            $table_name=$wpdb->prefix . 'dw_static_data';
-            $start_date= sanitize_text_field($data['start_date']);
-            $end_date= sanitize_text_field($data['end_date']);
-            $results =$wpdb->get_results(
+            $table_name = $wpdb->prefix . 'dw_static_data';
+            $start_date = sanitize_text_field($data['start_date']);
+            $end_date = sanitize_text_field($data['end_date']);
+            $results = $wpdb->get_results(
                 $wpdb->prepare(
                     "SELECT * FROM $table_name WHERE date >= %s AND date <= %s",
                     $start_date,
@@ -45,5 +56,5 @@ if (!class_exists('DW_REST_API')) {
             return $results;
         }
     }
-    add_action('rest_api_init',array('DW_REST_API','register_routes'));
+    add_action('rest_api_init', array('DW_REST_API', 'register_routes'));
 }

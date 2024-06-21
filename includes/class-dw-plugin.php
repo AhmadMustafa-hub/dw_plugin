@@ -6,6 +6,12 @@ if (!class_exists('DW_Plugin')) {
 
         protected static $instance = null;
 
+        /**
+         * Get the singleton instance of the class.
+         *
+         * @return DW_Plugin|null
+         */
+
         public static function get_instance()
         {
             if (null == self::$instance) {
@@ -20,11 +26,19 @@ if (!class_exists('DW_Plugin')) {
             $this->init_hooks();
         }
 
+        /**
+         * Include required files.
+         */
+
         private function includes()
         {
             require_once DW_PLUGIN_PATH . 'includes/class-dw-rest-api.php';
             require_once DW_PLUGIN_PATH . 'includes/class-dw-widget.php';
         }
+
+        /**
+         * Initialize hooks.
+         */
 
         private function init_hooks()
         {
@@ -32,24 +46,31 @@ if (!class_exists('DW_Plugin')) {
             add_action('wp_dashboard_setup', array('DW_Widget', 'add_dashboard_widget'));
         }
 
+        /**
+         * Enqueue scripts and styles.
+         *
+         * @param string $hook The current admin page.
+         */
         public function enqueue_scripts($hook)
         {
             if ('index.php' !== $hook) {
                 return;
             }
-            $js_file=glob(DW_PLUGIN_PATH.'build/static/js/main.*.js');
-            $css_file=glob(DW_PLUGIN_PATH.'build/static/css/main.*.css');
-            if(!empty($js_file)){
-                $js_version=substr($js_file[0],strpos($js_file[0],'main.')+5,-3);
-                wp_enqueue_script('dw_react_app', DW_PLUGIN_URL . 'build/static/js/main.'.$js_version.'.js', array('jquery', 'wp-element'), $js_version, true);
-
+            $js_file = glob(DW_PLUGIN_PATH . 'build/static/js/main.*.js');
+            $css_file = glob(DW_PLUGIN_PATH . 'build/static/css/main.*.css');
+            if (!empty($js_file)) {
+                $js_version = substr($js_file[0], strpos($js_file[0], 'main.') + 5, -3);
+                wp_enqueue_script('dw_react_app', DW_PLUGIN_URL . 'build/static/js/main.' . $js_version . '.js', array('jquery', 'wp-element'), $js_version, true);
             }
-            if(!empty($css_file)){
-                $css_version=substr($css_file[0],strpos($css_file[0],'main.')+5,-4);
-                wp_enqueue_style('dw_styles', DW_PLUGIN_URL . 'build/static/css/main.'.$css_version.'.css', array(), $css_version);
-
+            if (!empty($css_file)) {
+                $css_version = substr($css_file[0], strpos($css_file[0], 'main.') + 5, -4);
+                wp_enqueue_style('dw_styles', DW_PLUGIN_URL . 'build/static/css/main.' . $css_version . '.css', array(), $css_version);
             }
         }
+
+        /**
+         * Plugin activation callback.
+         */
 
         public static function activate()
         {
@@ -57,10 +78,16 @@ if (!class_exists('DW_Plugin')) {
             self::insert_dummy_data();
         }
 
+        /**
+         * Plugin deactivation callback.
+         */
         public static function deactivate()
         {
         }
 
+        /**
+         * Create database table.
+         */
         private static function create_table()
         {
             global $wpdb;
@@ -75,6 +102,10 @@ if (!class_exists('DW_Plugin')) {
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);
         }
+
+        /**
+         * Insert dummy data into the database.
+         */
         private static function insert_dummy_data()
         {
             global $wpdb;
