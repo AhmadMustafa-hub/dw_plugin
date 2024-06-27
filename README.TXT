@@ -47,11 +47,8 @@ You can use the dropdown menu in the widget to filter the data for the last 7 da
 = 1.0 =
 * Initial release of the Dashboard Widget Plugin.
 
-== Upgrade Notice ==
-
-= 1.0 =
-Initial release.
-
+= 1.0.1 =
+* Update plugin files.
 == Arbitrary section ==
 
 You can add any additional information here that does not fit into the other sections.
