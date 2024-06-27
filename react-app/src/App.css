@@ -37,10 +37,6 @@
   }
 }
 
-#dashboard-widgets .postbox .inside {
-  padding: 0 50px 35px 0 !important;
-}
-
 #dw_dashboard_widget .filter-dropdown {
   float: right;
   z-index: 999;
@@ -60,4 +56,17 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+.App {
+  text-align: center;
+  margin: 0;
+}
+.App .components-input-control__container.css-1y1qek0.em5sgkm3 {
+  width: 40%;
+  border-radius: 10px;
+  align-self: end;
+}
+select {
+  margin: 20px;
+  padding: 10px;
 }
